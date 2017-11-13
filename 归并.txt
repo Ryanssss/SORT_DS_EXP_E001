@@ -43,20 +43,18 @@ void merge(int *array,int *tmp_array,int lpos,int rpos,int end)
 
 }
 
-//递归的实现，终止条件为只有一个数，返回
-//递归返回之后，该序列部分为已经排好序
-//将两次的返回序列，进行归并排序
+
 void m_sort(int *array,int *tmp_array,int left,int right)
 {
     int centre = (left + right)/2;
     if(left < right)
     {
         m_sort(array,tmp_array,left,centre);
-        m_sort(array,tmp_array,centre+1,right);//centre记住只能+，不能是-，坑死老爹了，要是-的话，如left = 0，right = 1的时候，centre就是 -1呀，都越界到天边去了。调了好久。
+        m_sort(array,tmp_array,centre+1,right);
         merge(array,tmp_array,left,centre+1,right);
     }
 }
-//这个也可以不要其实就可以了，但是为了保持与前面排序算法的实现保的函数形参保持一致，还是加上了。
+
 void recursion_merge_sort(int *array,int num)
 {
     int *tmp_array;
