@@ -1,0 +1,25 @@
+void shell_sort(int *array,int num)//
+{
+    int increment = 0;
+    int temp = 0;
+    int j = 0;
+    int k = 0;
+    int m = 0;
+    for(increment = num/2;increment > 0;increment /= 2)
+    {
+        printf("increment:%d \n ",increment);
+        for(j = 0;j < increment;j++)
+        {
+            for(k = j;k < num;k = k+increment)
+            {
+                 printf("k:%d \n ",k);
+                for(m = k;(m >j)&&(array[m] < array[m-increment]);m = m -increment)
+                {
+                    temp = array[m];
+                    array[m] = array[m-increment];
+                    array[m-increment] = temp;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+void bubble_sort(int *array,int num)
+{
+        int i = 0;
+        int j = 0;
+        int temp;
+        for(;j < num;++j)
+        {
+                for(i= num;i >j ;--i)
+                {
+                    if(array[i] < array[i-1])
+                    {
+                        temp =array[i];
+                        array[i] = array[i-1];
+                        array[i-1] = temp;
+                    }
+                }
+        }
+}

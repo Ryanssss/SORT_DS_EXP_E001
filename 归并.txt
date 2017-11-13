@@ -1,0 +1,67 @@
+void merge(int *array,int *tmp_array,int lpos,int rpos,int end)  
+{
+    int left_end = rpos - 1;
+    int right_end = end;
+    int left_pos = lpos;
+    int right_pos = rpos;
+    int i;
+
+    int tmp = 0;
+    while((left_pos <= left_end)&&(right_pos <= right_end))
+    {
+        if(array[left_pos] < array[right_pos])
+        {
+            tmp_array[tmp] = array[left_pos];
+            ++left_pos;
+        }
+        else
+        {
+            tmp_array[tmp] = array[right_pos];
+            ++right_pos;
+        }
+        ++tmp;
+    }
+
+    while(left_pos <= left_end)
+    {
+        tmp_array[tmp] = array[left_pos];
+        left_pos++;
+         ++tmp;
+    }
+
+    while(right_pos <= right_end)
+    {
+        tmp_array[tmp] = array[right_pos];
+        right_pos++;
+         ++tmp;
+    }
+
+    for(i = 0;i < tmp;i++)
+    {
+        array[lpos + i] = tmp_array[i];
+    }
+
+}
+
+//递归的实现，终止条件为只有一个数，返回
+//递归返回之后，该序列部分为已经排好序
+//将两次的返回序列，进行归并排序
+void m_sort(int *array,int *tmp_array,int left,int right)
+{
+    int centre = (left + right)/2;
+    if(left < right)
+    {
+        m_sort(array,tmp_array,left,centre);
+        m_sort(array,tmp_array,centre+1,right);//centre记住只能+，不能是-，坑死老爹了，要是-的话，如left = 0，right = 1的时候，centre就是 -1呀，都越界到天边去了。调了好久。
+        merge(array,tmp_array,left,centre+1,right);
+    }
+}
+//这个也可以不要其实就可以了，但是为了保持与前面排序算法的实现保的函数形参保持一致，还是加上了。
+void recursion_merge_sort(int *array,int num)
+{
+    int *tmp_array;
+    tmp_array = malloc(num*sizeof(int));
+    assert(tmp_array != NULL);
+    m_sort(array,tmp_array,0,num-1);
+     free(tmp_array);
+}
