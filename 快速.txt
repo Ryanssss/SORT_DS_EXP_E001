@@ -29,7 +29,7 @@ int median_three(int *array,int left,int right)
 
     return array[right-1];
 }
-//快排实现
+//蹇帓瀹炵幇
 void q_sort(int*array,int left,int right)
 {
     int pivot;
@@ -38,16 +38,16 @@ void q_sort(int*array,int left,int right)
     int tmp;
     if(right-left < 3)
     {
-        insertion_sort(array+left,right-left+1);  //当待排的数量小于3的时候，就直接快排，其实小于20可以，这里是了验证
+        insertion_sort(array+left,right-left+1);  
     }
     else
     {
-        pivot = median_three(array,left,right);//找出基准值
-        left_i = left + 1; //从左边加一个，在三数中值的时候，小于中间值的已经放在了左边，因此没有必要再进行比较操作
-        right_i = right -2;//同上，加上中间值放在倒数第二个位置
+        pivot = median_three(array,left,right);
+        left_i = left + 1; 
+        right_i = right -2;
         while(1)
         {
-            while(array[left_i] < pivot )//相等就停止，左右两边都是，这样可以使相等的值，最大限度地在基准值的左右两边均匀分布
+            while(array[left_i] < pivot )
             {
                 ++left_i;
             }
@@ -61,17 +61,17 @@ void q_sort(int*array,int left,int right)
                 array[left_i] = array[right_i];
                 array[right_i] = tmp;
             }
-            else //当左边的游标等于或者大于右边的右边时候，该趟分割结束
+            else 
             {
                 break;
             }
         }
 
-//由于校准值放在数组的倒数第二个，因此将其放到合适的位置去，即与左游标对应的值与其进行交换即可
+
         tmp = array[left_i];  
         array[left_i] = array[right-1];
         array[right-1] = tmp;
-//继续迭代
+
         q_sort(array,left,left_i);
         q_sort(array,left_i+1,right);
     }
