@@ -1,9 +1,6 @@
 void heap_sort(int *array,int num)
 {
-    /*
-      初次建立大根堆，注意数组下表与堆元素序列的对应问题，数组的下表是从0开始的
-       o(n)
-    */
+  
     int k;
     for(k = num/2;k >= 0;k--)
     {
@@ -39,7 +36,7 @@ void heap_sort(int *array,int num)
         }
     }
 
-    /*取下根，与堆的最后一个元素交换，再重新建堆，如此迭代往复*/
+    
     int max;
     int end;
     int i;
